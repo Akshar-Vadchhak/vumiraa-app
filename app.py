@@ -71,3 +71,4 @@ elif menu == "Add Product":
             else:
 
                 st.error("SKU required")
+
