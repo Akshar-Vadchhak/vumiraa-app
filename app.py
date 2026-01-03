@@ -6,7 +6,9 @@ from google.oauth2.service_account import Credentials
 # --- CONNECT TO GOOGLE SHEETS (THE CLOUD) ---
 # This allows the app to work from ANY device (Phone or Laptop) and see the same data
 scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
-creds = Credentials.from_service_account_file("secrets.toml", scopes=scope)
+# NEW CODE (PASTE THIS)
+# We use st.secrets to read the data you pasted in the cloud settings
+creds = Credentials.from_service_account_info(st.secrets["gcp_service_account"], scopes=scope)
 client = gspread.authorize(creds)
 
 # Open the Google Sheet
@@ -67,4 +69,5 @@ elif menu == "Add Product":
                 add_data([sku, name, price, stock, "Live", img_url])
                 st.success("Saved! Check your other devices.")
             else:
+
                 st.error("SKU required")
